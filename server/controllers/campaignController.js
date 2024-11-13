@@ -1,5 +1,9 @@
 import Campaign from '../models/Campaign.js';
+import CommunicationLog from '../models/CommunicationLog.js';
 import User from '../models/User.js';
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+dotenv.config({path:'../config.env'});
 
 // Create a Campaign
 export const createCampaign = async (req, res) => {
@@ -66,25 +70,60 @@ export const updateCampaignStatus = async (req, res) => {
   }
 };
 
-// Send Emails to Campaign Audience (Using campaignId in URL)
+//Send emails to campaign customers
 export const sendEmailsToCampaign = async (req, res) => {
-  const { emailTemplate } = req.body;
   const { campaignId } = req.params;
 
   try {
+    // Fetch the campaign and populate the targetAudience with customer data
     const campaign = await Campaign.findById(campaignId).populate('targetAudience');
-
     if (!campaign) {
       return res.status(404).json({ message: 'Campaign not found' });
     }
 
-    const recipients = campaign.targetAudience.map(customer => customer.email);
+    const { msgTemplate, targetAudience } = campaign;
+    let msgsSentCount = 0;
+    let msgsFailedCount = 0;
 
-    recipients.forEach(email => {
-      console.log(`Sending email to ${email} with template: ${emailTemplate}`);
+    const transporter = nodemailer.createTransport({
+      service: 'Gmail', // or another email service
+      auth: {
+        user: 'harshjainn2003@gmail.com',
+        pass: process.env.EMAIL_PASS,
+      },
     });
 
-    res.status(200).json({ message: 'Emails sent to campaign audience' });
+    // Loop over each customer and send the email
+    for (const customer of targetAudience) {
+      const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: customer.email,
+        subject: `Campaign: ${campaign.name}`,
+        text: msgTemplate.replace('{{customerName}}', customer.name), // Replace placeholder if needed
+      };
+
+      try {
+        await transporter.sendMail(mailOptions);
+        msgsSentCount++;
+      } catch (error) {
+        console.error(`Failed to send email to ${customer.email}: ${error.message}`);
+        msgsFailedCount++;
+      }
+    }
+
+    // Update the communication log
+    const communicationLog = new CommunicationLog({
+      campaignId,
+      msgsSentCount,
+      msgsFailedCount,
+    });
+
+    await communicationLog.save();
+
+    res.status(200).json({
+      message: 'Emails sent successfully',
+      communicationLog,
+    });
   } catch (error) {
     res.status(500).json({ message: 'Error sending emails', error: error.message });
   }
