@@ -21,7 +21,7 @@ export const createCampaign = async (req, res) => {
 
     await newCampaign.save();
 
-    // Update the user's `campaignsCreated` field
+    // Update campaignsCreated field
     await User.findByIdAndUpdate(userId, {
       $push: { campaignsCreated: newCampaign._id }
     });
@@ -75,7 +75,6 @@ export const sendEmailsToCampaign = async (req, res) => {
   const { campaignId } = req.params;
 
   try {
-    // Fetch the campaign and populate the targetAudience with customer data
     const campaign = await Campaign.findById(campaignId).populate('targetAudience');
     if (!campaign) {
       return res.status(404).json({ message: 'Campaign not found' });
@@ -86,20 +85,19 @@ export const sendEmailsToCampaign = async (req, res) => {
     let msgsFailedCount = 0;
 
     const transporter = nodemailer.createTransport({
-      service: 'Gmail', // or another email service
+      service: 'Gmail', 
       auth: {
         user: 'harshjainn2003@gmail.com',
         pass: process.env.EMAIL_PASS,
       },
     });
-
-    // Loop over each customer and send the email
+  
     for (const customer of targetAudience) {
       const mailOptions = {
         from: process.env.EMAIL_USER,
         to: customer.email,
         subject: `Campaign: ${campaign.name}`,
-        text: msgTemplate.replace('{{customerName}}', customer.name), // Replace placeholder if needed
+        text: msgTemplate.replace('{{customerName}}', customer.name), 
       };
 
       try {
