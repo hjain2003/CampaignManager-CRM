@@ -5,6 +5,7 @@ server/node_modules/
 client/node_modules/
 
 config.env
+client/.env
 client/config.env
 server/config.env
 

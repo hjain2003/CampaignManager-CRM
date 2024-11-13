@@ -1,0 +1,103 @@
+.nav_container {
+    background-color: rgb(1,93,234);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 300px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+  }
+  
+  .logo_section {
+    display: flex;
+    /* justify-content: center; */
+    /* margin-bottom: 20px; */
+  }
+  hr{
+    margin-bottom: 20px;
+    margin-top: 30px;
+  }
+  .company_logo {
+    width: 100px;
+    height: auto;
+    border: 3px solid white;
+    border-radius: 20px;
+
+  }
+  
+  .user_info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .profile_pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .user_details .user_name {
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .user_details .user_email {
+    font-size: 0.9rem;
+    margin: 0;
+    color: #d1d1d1;
+  }
+  
+  .nav_links {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .nav_link {
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    /* margin-bottom: 10px; */
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Add space between items */
+  line-height: 1.5; /* Ensures the text and icon are properly aligned */
+  }
+  
+  .nav_icon {
+    margin-right: 12px; /* Space between icon and text */
+    font-size: 1.4rem; /* Adjust size to be consistent with text */
+    display: inline-block;
+    margin-top: -2px;
+  }
+
+  .nav_link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+  }
+  
+  .nav_link:active {
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+  }
+  
+  .nav_link.active {
+    background-color: rgba(255, 255, 255, 0.3);
+    font-weight: bold;
+    border-radius: 10px;
+  }
+
+  .logo_section img{
+    height: 65px;
+    width: 65px;
+  }
+ .logo_section{
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 30px;
+  }
