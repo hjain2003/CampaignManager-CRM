@@ -1,7 +1,7 @@
 import User from '../models/User.js'; 
 import axios from 'axios';
 
-
+//Middleware
 const verifyGoogleToken = async (token) => {
   try {
     const response = await axios.post(
@@ -49,29 +49,25 @@ export const login = async (req, res) => {
 };
 
 
-
+// Get User Profile
 export const getUserProfile = async (req, res) => {
     const authHeader = req.headers.authorization;
   
-    // Check if the token is provided in the Authorization header
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res.status(401).json({ message: 'Authorization token required' });
     }
   
-    const token = authHeader.split(' ')[1]; // Extract the token
+    const token = authHeader.split(' ')[1];
   
     try {
-      // Step 1: Verify the Google ID token
       const decoded = await verifyGoogleToken(token);
-  
-      // Step 2: Find the user in the database using the googleId
+
       const user = await User.findOne({ googleId: decoded.sub });
   
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
   
-      // Step 3: Send the user's profile information
       res.status(200).json({
         email: user.email,
         username: user.username,
