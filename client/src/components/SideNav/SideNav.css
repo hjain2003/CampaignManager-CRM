@@ -15,6 +15,18 @@
     /* justify-content: center; */
     /* margin-bottom: 20px; */
   }
+  #logout{
+    border-radius: 6px;
+    padding: 5px;
+    color: white;
+    background-color: red;
+    cursor: pointer;
+    border: none;
+    font-size: 18px;
+    /* width: 60px; */
+    /* margin-top: 5px; */
+  }
+
   hr{
     margin-bottom: 20px;
     margin-top: 30px;

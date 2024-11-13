@@ -41,6 +41,10 @@ const SideNav = () => {
     }
   };
 
+  const handleLogout=()=>{
+    localStorage.clear();
+    navigate('/login');
+  }
   return (
     <div className='nav_container'>
       {/* Company logo */}
@@ -75,9 +79,10 @@ const SideNav = () => {
         >
           <FaUserAlt className="nav_icon" /> Profile
         </p>
+
       </div>
 
-      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
       {/* User Profile Section */}
       {userData && (
@@ -89,6 +94,7 @@ const SideNav = () => {
           </div>
         </div>
       )}
+      <button id="logout" onClick={handleLogout}>Logout</button>
     </div>
   );
 };
