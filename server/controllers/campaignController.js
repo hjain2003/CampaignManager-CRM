@@ -15,7 +15,7 @@ export const createCampaign = async (req, res) => {
       name,
       description,
       msgTemplate,
-      targetAudience,
+      targetAudience:customers,
       createdBy: userId,
       filtersUsed
     });
@@ -121,7 +121,7 @@ export const sendEmailsToCampaign = async (req, res) => {
 
     campaign.status = 'Completed';
     await campaign.save();
-    
+
     res.status(200).json({
       message: 'Emails sent successfully',
       communicationLog,

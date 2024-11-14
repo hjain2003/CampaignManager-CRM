@@ -25,8 +25,8 @@ const SideNav = () => {
   useEffect(() => {
     const pathToLink = {
       '/dashboard': 'Dashboard',
-      '/campaign-history': 'Campaign History',
-      '/create-campaign': 'Create Campaign',
+      '/campaignHistory': 'Campaign History',
+      '/createCampaign': 'Create Campaign',
       '/profile': 'Profile',
     };
     setActiveLink(pathToLink[location.pathname] || 'Dashboard');
@@ -60,13 +60,13 @@ const SideNav = () => {
         </p>
         <p 
           className={`nav_link ${activeLink === 'Campaign History' ? 'active' : ''}`} 
-          onClick={() => handleNavClick('Campaign History', '/campaign-history')}
+          onClick={() => handleNavClick('Campaign History', '/campaignHistory')}
         >
           <FiList className="nav_icon" /> Campaign History
         </p>
         <p 
           className={`nav_link ${activeLink === 'Create Campaign' ? 'active' : ''}`} 
-          onClick={() => handleNavClick('Create Campaign', '/create-campaign')}
+          onClick={() => handleNavClick('Create Campaign', '/createCampaign')}
         >
           <MdAddCircleOutline className="nav_icon" /> Create Campaign
         </p>

@@ -1,36 +1,83 @@
 .full_screen_container {
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .dashboard_content {
-    padding: 20px;
-    flex-grow: 1;
-  }
-  
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box; /* Ensures padding/border doesn't affect size */
+}
+
+.dashboard_content {
+  padding: 1.25rem; /* Adjusted for responsive scaling */
+  flex-grow: 1; /* Ensures the content takes available space */
+  overflow-x: auto; /* Allows horizontal scrolling if content overflows */
+}
+
+.chart-container {
+  width: 100%; /* Ensure full width within container */
+  height: 20vw; /* Height as a percentage of the viewport width, scalable */
+  margin-top: 1.25rem; /* Responsive margin */
+  background-color: rgb(249, 249, 249);
+  border-radius: 1.25rem; /* Scalable border radius */
+  box-sizing: border-box; /* Ensures padding doesn’t cause overflow */
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem; /* Adjusted gap for flexibility */
+  font-size: 1.125rem; /* Slightly larger for better readability */
+}
+
+select {
+  padding: 0.625rem; /* Adjusted padding for responsiveness */
+  font-size: 1rem; /* Responsive font size */
+  width: 100%; /* Ensure it takes up the available width */
+  max-width: 200px; /* Limits width to prevent over-expansion */
+  box-sizing: border-box; /* Ensures padding doesn’t cause overflow */
+}
+
+.recent_campaign_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* Allows wrapping of elements for smaller screens */
+  gap: 1.25rem; /* Space between items */
+}
+
+.recent_campaign_container > div {
+  flex: 1 1 45%; /* Ensures cards take up 45% width, and it wraps if necessary */
+  min-width: 300px; /* Prevents cards from becoming too narrow */
+  max-width: 28%; /* Limits width to 48% of the container */
+  box-sizing: border-box; /* Prevents padding from affecting width */
+}
+@media (max-width: 768px) {
   .chart-container {
-    width: 100%; /* Full width */
-    height: 300px; /* Increase height */
-    margin-top: 20px;
-    background-color: rgb(249, 249, 249);
-  }
-  
-  label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1rem;
-  }
-  
-  select {
-    padding: 5px;
-    font-size: 1rem;
+      height: 25vw; /* Increase height slightly for smaller screens */
   }
 
-  .recent_campaign_container{
-    display: flex;
-    flex-direction: row;
+  .recent_campaign_container {
+      flex-direction: column; /* Stack items vertically for small screens */
   }
-  
+
+  .recent_campaign_container > div {
+    flex: 1 1 48%; /* Ensure cards take up at least 48% on smaller screens */
+    min-width: 250px; /* Avoid too small width */
+}
+}
+
+@media (max-width: 480px) {
+  .full_screen_container {
+      flex-direction: column; /* Stack dashboard content vertically */
+  }
+
+  .dashboard_content {
+      padding: 1rem; /* Reduce padding for smaller screens */
+  }
+
+  label {
+      font-size: 1rem; /* Adjust label font size for smaller screens */
+  }
+  .recent_campaign_container > div {
+    flex: 1 1 100%; /* Cards will take 100% of available width on extremely small screens */
+    min-width: 200px; /* Prevents cards from becoming too small */
+}
+}

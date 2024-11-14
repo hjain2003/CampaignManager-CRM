@@ -72,7 +72,7 @@ const Campaign = ({ name, date, description, status, filters, audienceSize, msg 
         <h3>{name}</h3><br />
         <p><strong>Date:</strong> {formattedDate}</p><br />
         <p><strong>Description:</strong> {description}</p><br />
-        <p style={statusStyle}><strong>Status:</strong> {status}</p>
+        <p style={statusStyle} className='card_status'><strong>Status:</strong> {status}</p>
       </div>
     </>
   );

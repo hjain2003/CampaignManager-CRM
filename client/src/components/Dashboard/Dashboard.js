@@ -191,8 +191,7 @@ const Dashboard = () => {
               audienceSize = {campaign.targetAudience.length}
                />
           ))}
-          <Campaign/>
-          <Campaign/>
+          
         </div>
       </div>
     </div>
