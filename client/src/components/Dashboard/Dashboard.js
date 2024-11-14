@@ -4,9 +4,9 @@ import axios from 'axios';
 import { Line, Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import SideNav from '../SideNav/SideNav';
+import Campaign from '../Campaign/Campaign';
 import './Dashboard.css';
 
-// Register necessary Chart.js components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend);
 
 const Dashboard = () => {
@@ -15,6 +15,7 @@ const Dashboard = () => {
   const [chartData, setChartData] = useState(null);
   const [selectedChart, setSelectedChart] = useState('customerCount');
   const [loading, setLoading] = useState(true);
+  const [campaigns, setCampaigns] = useState([]);
 
   useEffect(() => {
     const storedUserData = localStorage.getItem('userData');
@@ -29,6 +30,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (userData && userData.googleIdToken) {
       fetchCustomerData();
+      fetchCampaignHistory();
     }
   }, [userData, selectedChart]);
 
@@ -47,6 +49,32 @@ const Dashboard = () => {
       console.error('Error fetching data', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchCampaignHistory = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/campaign/history', {
+        headers: {
+          Authorization: `Bearer ${userData.googleIdToken}`
+        }
+      });
+
+      const allCampaigns = response.data.campaigns;
+
+      // Sort campaigns by creation date and get the three most recent
+      const recentCampaigns = allCampaigns
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .slice(0, 3)
+        .map(campaign => ({
+          ...campaign,
+          audienceSize: campaign.targetAudience.length,
+          filters: JSON.stringify(campaign.filtersUsed)
+        }));
+
+      setCampaigns(recentCampaigns);
+    } catch (error) {
+      console.error('Error fetching campaign history', error);
     }
   };
 
@@ -148,6 +176,24 @@ const Dashboard = () => {
             </div>
           )
         )}
+        <br/>
+        <h2>Recent Campaigns</h2>
+        <br/>
+        <div className='recent_campaign_container'>
+          {campaigns.map((campaign, index) => (
+            <Campaign key={index}
+             name={campaign.name}
+              date={campaign.createdDate} 
+              description={campaign.description} 
+              status={campaign.status} 
+              msg={campaign.msgTemplate}
+              filters={campaign.filters}
+              audienceSize = {campaign.targetAudience.length}
+               />
+          ))}
+          <Campaign/>
+          <Campaign/>
+        </div>
       </div>
     </div>
   );

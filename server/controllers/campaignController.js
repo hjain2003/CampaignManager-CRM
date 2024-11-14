@@ -7,7 +7,7 @@ dotenv.config({path:'../config.env'});
 
 // Create a Campaign
 export const createCampaign = async (req, res) => {
-  const { name, description, msgTemplate, targetAudience } = req.body;
+  const { name, description, msgTemplate, targetAudience, filtersUsed } = req.body;
   const userId = req.userId; 
 
   try {
@@ -17,6 +17,7 @@ export const createCampaign = async (req, res) => {
       msgTemplate,
       targetAudience,
       createdBy: userId,
+      filtersUsed
     });
 
     await newCampaign.save();
@@ -118,6 +119,9 @@ export const sendEmailsToCampaign = async (req, res) => {
 
     await communicationLog.save();
 
+    campaign.status = 'Completed';
+    await campaign.save();
+    
     res.status(200).json({
       message: 'Emails sent successfully',
       communicationLog,

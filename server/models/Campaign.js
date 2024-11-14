@@ -7,7 +7,8 @@ const CampaignSchema = new mongoose.Schema({
   status: { type: String, enum: ['Active', 'Completed'], default: 'Active' },
   createdDate: { type: Date, default: Date.now },
   targetAudience: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Customer' }],
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  filtersUsed: { type: Object, required: true }
 });
 
 export default mongoose.model('Campaign', CampaignSchema);
