@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './SideNav.css';
 import xenologo from '../../xenologo.png';
-import { useNavigate } from 'react-router-dom';
-import { AiOutlineHome } from 'react-icons/ai'; // Dashboard icon
-import { FiList } from 'react-icons/fi'; // Campaign History icon
-import { MdAddCircleOutline } from 'react-icons/md'; // Create Campaign icon
-import { FaUserAlt } from 'react-icons/fa'; // Profile icon
+import { AiOutlineHome } from 'react-icons/ai';
+import { FiList } from 'react-icons/fi';
+import { MdAddCircleOutline } from 'react-icons/md';
+import { FaUserAlt } from 'react-icons/fa';
 
 const SideNav = () => {
   const [userData, setUserData] = useState(null);
-  const [activeLink, setActiveLink] = useState('Dashboard');
   const navigate = useNavigate();
+  const [activeLink, setActiveLink] = useState('Dashboard');
+  const location = useLocation();
 
   useEffect(() => {
     // Retrieve user data from localStorage
@@ -20,70 +21,63 @@ const SideNav = () => {
     }
   }, []);
 
-  const handleNavClick = (link) => {
+  // Determine active link based on current path
+  useEffect(() => {
+    const pathToLink = {
+      '/dashboard': 'Dashboard',
+      '/campaign-history': 'Campaign History',
+      '/create-campaign': 'Create Campaign',
+      '/profile': 'Profile',
+    };
+    setActiveLink(pathToLink[location.pathname] || 'Dashboard');
+  }, [location.pathname]);
+
+  const handleNavClick = (link, path) => {
     setActiveLink(link);
-    // You can navigate to different routes if needed
-    switch (link) {
-      case 'Dashboard':
-        navigate('/dashboard');
-        break;
-      case 'Campaign History':
-        navigate('/dashboard');
-        break;
-      case 'Create Campaign':
-        navigate('/dashboard');
-        break;
-      case 'Profile':
-        navigate('/dashboard');
-        break;
-      default:
-        navigate('/dashboard');
-    }
+    navigate(path);
   };
 
-  const handleLogout=()=>{
+  const handleLogout = () => {
     localStorage.clear();
     navigate('/login');
-  }
+  };
+
   return (
     <div className='nav_container'>
       {/* Company logo */}
       <div className="logo_section">
-        <img src={xenologo} alt="Company Logo" className="company_logo"/> &nbsp; CRM
+        <img src={xenologo} alt="Company Logo" className="company_logo" /> &nbsp; CRM
       </div>
-      <hr/>
+      <hr />
 
       {/* Navigation Links */}
       <div className="nav_links">
         <p 
           className={`nav_link ${activeLink === 'Dashboard' ? 'active' : ''}`} 
-          onClick={() => handleNavClick('Dashboard')}
+          onClick={() => handleNavClick('Dashboard', '/dashboard')}
         >
           <AiOutlineHome className="nav_icon" /> Dashboard
         </p>
         <p 
           className={`nav_link ${activeLink === 'Campaign History' ? 'active' : ''}`} 
-          onClick={() => handleNavClick('Campaign History')}
+          onClick={() => handleNavClick('Campaign History', '/campaign-history')}
         >
           <FiList className="nav_icon" /> Campaign History
         </p>
         <p 
           className={`nav_link ${activeLink === 'Create Campaign' ? 'active' : ''}`} 
-          onClick={() => handleNavClick('Create Campaign')}
+          onClick={() => handleNavClick('Create Campaign', '/create-campaign')}
         >
           <MdAddCircleOutline className="nav_icon" /> Create Campaign
         </p>
         <p 
           className={`nav_link ${activeLink === 'Profile' ? 'active' : ''}`} 
-          onClick={() => handleNavClick('Profile')}
+          onClick={() => handleNavClick('Profile', '/profile')}
         >
           <FaUserAlt className="nav_icon" /> Profile
         </p>
-
       </div>
-
-      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-
+      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
       {/* User Profile Section */}
       {userData && (
         <div className="user_info">
