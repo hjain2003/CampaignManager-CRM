@@ -66,8 +66,9 @@ const Dashboard = () => {
 
       // Sort campaigns by creation date and get the three most recent
       const recentCampaigns = allCampaigns
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        .slice(0, 3)
+      .slice()
+      .reverse()
+      .slice(0, 3)
         .map(campaign => ({
           ...campaign,
           audienceSize: campaign.targetAudience.length,
@@ -112,6 +113,10 @@ const Dashboard = () => {
       ]
     });
   };
+
+  const navigateToCreateCampaign=()=>{
+    navigate('/createCampaign')
+  }
 
   return (
     <div className='full_screen_container'>
@@ -181,12 +186,13 @@ const Dashboard = () => {
         <br/>
         <div className='recent-campaigns-header-section'>
           <div className='recent-campaigns-heading'>Recent Campaigns</div>
-          <div className='create-campaign-shortcut'><MdAddCircleOutline className='create-camp-icon-short' /> Create New Campaign</div>
+          <div className='create-campaign-shortcut' onClick={navigateToCreateCampaign}><MdAddCircleOutline className='create-camp-icon-short' /> Create New Campaign</div>
         </div>
         <br/>
         <div className='recent_campaign_container'>
           {campaigns.map((campaign, index) => (
             <Campaign key={index}
+            campaignId={campaign._id}
              name={campaign.name}
               date={campaign.createdDate} 
               description={campaign.description} 

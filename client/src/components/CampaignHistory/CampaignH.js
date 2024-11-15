@@ -103,6 +103,7 @@ const CampaignH = () => {
             {filteredCampaigns.length>0 ? (filteredCampaigns.map((campaign, index) => (
               <Campaign
                 key={index}
+                campaignId={campaign._id}
                 name={campaign.name}
                 date={campaign.createdDate}
                 description={campaign.description}

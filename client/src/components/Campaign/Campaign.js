@@ -1,10 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import './Campaign.css';
 import { RxCross2 } from "react-icons/rx";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const Campaign = ({ name, date, description, status, filters, audienceSize, msg }) => {
+const Campaign = ({ name, date, description, status, filters, audienceSize, msg, campaignId }) => {
+  const navigate = useNavigate();
   const [openviewbox, setviewbox] = useState(false);
+  const [sendingMails, setSendingMails] = useState(false);  // Track sending state
+  const [error, setError] = useState(null); // Track errors if any
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const storedUserData = localStorage.getItem('userData');
+    if (storedUserData) {
+      const parsedData = JSON.parse(storedUserData);
+      setUserData(parsedData);
+    } else {
+      navigate('/login');
+    }
+  }, [navigate]);
+
+
+
   const formattedDate = new Date(date).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
@@ -33,7 +52,6 @@ const Campaign = ({ name, date, description, status, filters, audienceSize, msg 
   const renderFilters = (filters) => {
     try {
       const filterObj = JSON.parse(filters); // Convert filters string back to object
-
       return (
         <ul>
           {Object.keys(filterObj).map((key) => (
@@ -49,6 +67,37 @@ const Campaign = ({ name, date, description, status, filters, audienceSize, msg 
     }
   };
 
+  // Send emails handler
+  const handleSendEmails = async () => {
+    console.log(campaignId);
+   
+
+    if (!userData.googleIdToken) {
+      setError('User is not logged in.');
+      return;
+    }
+
+    try {
+      setSendingMails(true);
+      setError(null); // Reset error state
+
+      const response = await axios.post(`http://localhost:5000/campaign/${campaignId}/send-emails`, {}, {
+        headers: {
+          Authorization: `Bearer ${userData.googleIdToken}`,
+        },
+      });
+
+      if (response.status === 200) {
+        alert('Emails sent successfully!');
+      }
+    } catch (error) {
+      setError('Failed to send emails. Please try again.');
+      console.error('Error sending emails', error);
+    } finally {
+      setSendingMails(false);
+    }
+  };
+
   return (
     <>
       {openviewbox && (
@@ -61,7 +110,18 @@ const Campaign = ({ name, date, description, status, filters, audienceSize, msg 
           <p><strong>Description:</strong> {description}</p>
           <p><strong>Audience Segment Size:</strong> {audienceSize} customers</p>
           <p><strong>Message Template:</strong> {msg}</p>
-          <button className="send_button" onClick={() => alert("Mails sent!")}>Send Mails</button>
+          
+          {/* Show sending button */}
+          <button
+            className="send_button"
+            onClick={handleSendEmails}
+            disabled={sendingMails}  // Disable button if mails are being sent
+          >
+            {sendingMails ? 'Sending...' : 'Send Mails'}
+          </button>
+          
+          {/* Error handling */}
+          {error && <p style={{ color: 'red' }}>{error}</p>}
         </div>
       )}
 
@@ -69,7 +129,7 @@ const Campaign = ({ name, date, description, status, filters, audienceSize, msg 
         <button className="popup_icon_button" onClick={handleOpenPopup} aria-label="Open details">
           <FaExternalLinkAlt />
         </button>
-        
+
         <h3>{name}</h3><br />
         <p><strong>Date:</strong> {formattedDate}</p><br />
         <p><strong>Description:</strong> {description}</p><br />

@@ -138,6 +138,7 @@ const CreateCampaign = () => {
               type="text"
               placeholder="Enter suitable name"
               value={name}
+              required
               onChange={(e) => setName(e.target.value)}
             />
             <br />
@@ -152,7 +153,7 @@ const CreateCampaign = () => {
             <br />
 
             <label>Filters Used</label>
-            <div>
+            <div id="filters_used_edit">
               {Object.entries(filters).map(([key, value]) => (
                 value && value !== "" && (
                   <div key={key}>
