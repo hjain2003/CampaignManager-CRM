@@ -177,3 +177,22 @@ button:hover {
   /* width: 40px; */
   font-size: 15px;
 }
+
+.formatting_toolbar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.formatting_toolbar button {
+  padding: 5px 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: black;
+  font-size: 14px;
+}
+
+.formatting_toolbar button:hover {
+  background-color: #e2e6ea;
+}

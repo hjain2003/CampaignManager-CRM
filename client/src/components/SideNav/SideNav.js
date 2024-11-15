@@ -14,7 +14,6 @@ const SideNav = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Retrieve user data from localStorage
     const storedUserData = localStorage.getItem('userData');
     if (storedUserData) {
       setUserData(JSON.parse(storedUserData));
@@ -39,7 +38,7 @@ const SideNav = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate('/login');
+    navigate('/');
   };
 
   return (

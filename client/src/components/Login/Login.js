@@ -37,7 +37,7 @@ const Login = () => {
         email: userData.email,
         googleIdToken: userData.googleIdToken,
         googleAccessToken: userData.googleAccessToken,
-        profilePic: userData.profilePic || "", // Default to empty string if not available
+        profilePic: userData.profilePic || "", 
       }));
 
       console.log("User data stored in localStorage:", userData);

@@ -2,15 +2,15 @@
   position: relative;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   height: 240px;
-  width: 100%; /* Ensure the card takes up the available width of its container */
-  max-width: 300px; /* Set a maximum width for the card */
+  width: 100%; 
+  max-width: 300px; 
   display: flex;
   flex-direction: column;
   padding: 20px;
   margin-bottom: 15px;
   background-color: #fff;
   margin-right: 20px;
-  box-sizing: border-box; /* Prevents padding from affecting width */
+  box-sizing: border-box; 
   border-radius: 10px;
 }
 
@@ -113,8 +113,8 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .campaign_card {
-    width: 48%; /* Cards take up less width */
-    margin-right: 15px; /* Adjust margin to prevent overflow */
+    width: 48%; 
+    margin-right: 15px; 
   }
 
   .recent_campaign_container {
@@ -126,13 +126,13 @@
 
 @media (max-width: 480px) {
   .campaign_card {
-    width: 100%; /* Cards take up full width on very small screens */
-    margin-right: 0; /* No margin for full-width cards */
+    width: 100%; 
+    margin-right: 0; 
   }
 
   .recent_campaign_container {
     display: flex;
-    flex-direction: column; /* Stack the campaign cards on smaller screens */
+    flex-direction: column; 
     gap: 15px;
   }
 }

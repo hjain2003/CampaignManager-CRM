@@ -13,7 +13,7 @@ const Profile = () => {
   const [userData, setUserData] = useState(null);
   const [campaigns, setCampaigns] = useState([]);
   const [campaignCount, setCampaignCount] = useState(0);
-  const [imageLoaded, setImageLoaded] = useState(true); // Track if the image is loaded
+  const [imageLoaded, setImageLoaded] = useState(true);
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("userData");
@@ -21,7 +21,7 @@ const Profile = () => {
       const parsedData = JSON.parse(storedUserData);
       setUserData(parsedData);
     } else {
-      navigate("/login");
+      navigate("/");
     }
   }, [navigate]);
 
@@ -46,7 +46,7 @@ const Profile = () => {
   };
 
   const handleImageError = () => {
-    setImageLoaded(false); // Set to false if the image fails to load
+    setImageLoaded(false); 
   };
 
   if (!userData) {

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Campaign = ({ name, date, description, status, filters, audienceSize, msg, campaignId }) => {
   const navigate = useNavigate();
   const [openviewbox, setviewbox] = useState(false);
-  const [sendingMails, setSendingMails] = useState(false); // Track sending state
+  const [sendingMails, setSendingMails] = useState(false); 
   // const [error, setError] = useState(null); // Track errors if any
   const [userData, setUserData] = useState(null);
   const [communicationLog, setCommunicationLog] = useState(null);
@@ -19,7 +19,7 @@ const Campaign = ({ name, date, description, status, filters, audienceSize, msg,
       const parsedData = JSON.parse(storedUserData);
       setUserData(parsedData);
     } else {
-      navigate("/login");
+      navigate("/");
     }
   }, [navigate]);
 
@@ -39,7 +39,6 @@ const Campaign = ({ name, date, description, status, filters, audienceSize, msg,
     margin: "0 auto",
   };
 
-  // Handler to toggle popup view box
   const handleOpenPopup = () => {
     setviewbox(true);
   };
@@ -50,7 +49,7 @@ const Campaign = ({ name, date, description, status, filters, audienceSize, msg,
 
   const renderFilters = (filters) => {
     try {
-      const filterObj = JSON.parse(filters); // Convert filters string back to object
+      const filterObj = JSON.parse(filters); 
       return (
         <ul>
           {Object.keys(filterObj).map((key) => (
@@ -96,8 +95,7 @@ const Campaign = ({ name, date, description, status, filters, audienceSize, msg,
       fetchCommunicationLog();
     }
   }, [campaignId, status, userData]);
-
-  // Send emails handler
+ 
   const handleSendEmails = async () => {
     console.log(campaignId);
 

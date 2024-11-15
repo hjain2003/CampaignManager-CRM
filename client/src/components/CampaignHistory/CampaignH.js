@@ -18,7 +18,6 @@ const CampaignH = () => {
       const storedUserData = localStorage.getItem('userData');
       const parsedData = storedUserData ? JSON.parse(storedUserData) : null;
       const token = parsedData?.googleIdToken;
-    
 
       if (token) {
         const response = await axios.get('http://localhost:5000/campaign/history', {
@@ -28,10 +27,11 @@ const CampaignH = () => {
         });
 
         const allCampaigns = response.data.campaigns.map(campaign => ({
-            ...campaign,
-            audienceSize: campaign.targetAudience.length,
-            filters: JSON.stringify(campaign.filtersUsed)
-          }));
+          ...campaign,
+          audienceSize: campaign.targetAudience.length,
+          filters: JSON.stringify(campaign.filtersUsed),
+          successRate: calculateSuccessRate(campaign), 
+        }));
 
         setCampaigns(allCampaigns);
         applyFilter('Most Recent', allCampaigns);
@@ -41,45 +41,53 @@ const CampaignH = () => {
     }
   };
 
+  const calculateSuccessRate = (campaign) => {
+    if (campaign.status !== 'Completed' || !campaign.commLogs) return null;
+    const { msgsSentCount, msgsFailedCount } = campaign.commLogs;
+    const totalMessages = msgsSentCount + msgsFailedCount;
+    return totalMessages > 0 ? ((msgsSentCount / totalMessages) * 100).toFixed(2) : 0;
+  };
+
   const applyFilter = (filter, campaignsData = campaigns) => {
     let sortedCampaigns;
-  
+
     switch (filter) {
       case 'Most Recent':
-        // Sort by createdAt in descending order and reverse if times are missing or inconsistent
-        sortedCampaigns = [...campaignsData].sort((a, b) => {
-          const dateA = new Date(a.createdAt);
-          const dateB = new Date(b.createdAt);
-          return dateB - dateA || 0; // Fallback to reverse order if times are inconsistent
-        });
+        sortedCampaigns = [...campaignsData].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         break;
-  
+
       case 'Oldest':
         sortedCampaigns = [...campaignsData].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
         break;
-  
+
       case 'Active':
         sortedCampaigns = campaignsData.filter(campaign => campaign.status === 'Active');
         break;
-  
+
       case 'Completed':
         sortedCampaigns = campaignsData.filter(campaign => campaign.status === 'Completed');
         break;
-  
+
+      case 'Success Rate':
+        sortedCampaigns = [...campaignsData]
+          .filter(campaign => campaign.status === 'Completed' && campaign.successRate !== null) 
+          .sort((a, b) => b.successRate - a.successRate);
+        break;
+
       default:
         sortedCampaigns = campaignsData;
         break;
     }
-  
-    // Reverse the sorted campaigns if "Most Recent" filter is selected and times are inconsistent
+
     if (filter === 'Most Recent') {
       sortedCampaigns.reverse();
     }
-  
+
     setFilteredCampaigns(sortedCampaigns);
     setActiveFilter(filter);
   };
-  
+
+
 
   return (
     <>
@@ -89,7 +97,7 @@ const CampaignH = () => {
           <h2>Campaign History</h2>
           <br />
           <div className="history_filters">
-            {['Most Recent', 'Oldest', 'Active', 'Completed'].map((filter) => (
+            {['Most Recent', 'Oldest', 'Active', 'Completed', 'Success Rate'].map((filter) => (
               <span
                 key={filter}
                 className={activeFilter === filter ? 'active_filter' : ''}
@@ -101,23 +109,23 @@ const CampaignH = () => {
           </div>
           <br />
           <div className="campaign_cards_holder">
-            {filteredCampaigns.length>0 ? (filteredCampaigns.map((campaign, index) => (
-              <Campaign
-                key={index}
-                campaignId={campaign._id}
-                name={campaign.name}
-                date={campaign.createdDate}
-                description={campaign.description}
-                status={campaign.status}
-                msg={campaign.msgTemplate}
-                filters={campaign.filters}
-                audienceSize={campaign.audienceSize}
-              />
-            ))
-            ):(
-                <p>No data available</p>
-            )
-            }
+            {filteredCampaigns.length > 0 ? (
+              filteredCampaigns.map((campaign, index) => (
+                <Campaign
+                  key={index}
+                  campaignId={campaign._id}
+                  name={campaign.name}
+                  date={campaign.createdDate}
+                  description={campaign.description}
+                  status={campaign.status}
+                  msg={campaign.msgTemplate}
+                  filters={campaign.filters}
+                  audienceSize={campaign.audienceSize}
+                />
+              ))
+            ) : (
+              <p>No data available</p>
+            )}
           </div>
         </div>
       </div>

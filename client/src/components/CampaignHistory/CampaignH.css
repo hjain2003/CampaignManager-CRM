@@ -29,7 +29,7 @@
   
   .campaign_cards_holder {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* Default: 5 cards per row */
+    grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     margin-top: 20px;
   }
@@ -37,25 +37,25 @@
   /* Responsive Grid Adjustments */
   @media (max-width: 1200px) {
     .campaign_cards_holder {
-      grid-template-columns: repeat(4, 1fr); /* 4 cards per row on medium screens */
+      grid-template-columns: repeat(4, 1fr); 
     }
   }
   
   @media (max-width: 1024px) {
     .campaign_cards_holder {
-      grid-template-columns: repeat(3, 1fr); /* 3 cards per row on smaller screens */
+      grid-template-columns: repeat(3, 1fr); 
     }
   }
   
   @media (max-width: 768px) {
     .campaign_cards_holder {
-      grid-template-columns: repeat(2, 1fr); /* 2 cards per row on tablets and smaller screens */
+      grid-template-columns: repeat(2, 1fr); 
     }
   }
   
   @media (max-width: 480px) {
     .campaign_cards_holder {
-      grid-template-columns: 1fr; /* 1 card per row on mobile screens */
+      grid-template-columns: 1fr;
     }
   }
   

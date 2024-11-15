@@ -24,13 +24,11 @@ const CreateCampaign = () => {
   const [showCustomers, setShowCustomers] = useState(false);
   const [createBox, setCreateBox] = useState(false);
 
-  // State for the input fields
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [msgTemplate, setMsgTemplate] = useState("");
 
   useEffect(() => {
-    // Sync the filter min and max values with orderRange
     setFilters((prevFilters) => ({
       ...prevFilters,
       minOrderValue: orderRange[0],
@@ -52,7 +50,7 @@ const CreateCampaign = () => {
       const parsedData = JSON.parse(storedUserData);
       setUserData(parsedData);
     } else {
-      navigate("/login");
+      navigate("/");
     }
   }, [navigate]);
 
