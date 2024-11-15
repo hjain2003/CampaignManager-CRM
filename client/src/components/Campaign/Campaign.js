@@ -97,7 +97,7 @@ const Campaign = ({ name, date, description, status, filters, audienceSize, msg,
   }, [campaignId, status, userData]);
  
   const handleSendEmails = async () => {
-    console.log(campaignId);
+    // console.log(campaignId);
 
     if (!userData?.googleIdToken) {
       // setError("User is not logged in.");

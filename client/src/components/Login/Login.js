@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import filterimg from '../../gold.png'
 
 const Login = () => {
-    console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID);
+    // console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -40,7 +40,7 @@ const Login = () => {
         profilePic: userData.profilePic || "", 
       }));
 
-      console.log("User data stored in localStorage:", userData);
+      // console.log("User data stored in localStorage:", userData);
       setIsLoading(false);
       navigate('/dashboard');
     } catch (error) {
