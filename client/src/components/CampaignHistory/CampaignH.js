@@ -18,6 +18,7 @@ const CampaignH = () => {
       const storedUserData = localStorage.getItem('userData');
       const parsedData = storedUserData ? JSON.parse(storedUserData) : null;
       const token = parsedData?.googleIdToken;
+    
 
       if (token) {
         const response = await axios.get('http://localhost:5000/campaign/history', {

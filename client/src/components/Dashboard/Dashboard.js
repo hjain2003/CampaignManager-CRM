@@ -56,6 +56,7 @@ const Dashboard = () => {
 
   const fetchCampaignHistory = async () => {
     try {
+      if (!userData || !userData.googleIdToken) return;
       const response = await axios.get('http://localhost:5000/campaign/history', {
         headers: {
           Authorization: `Bearer ${userData.googleIdToken}`
