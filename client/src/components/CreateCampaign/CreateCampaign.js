@@ -95,6 +95,7 @@ const CreateCampaign = () => {
 
   const handleCreateCampaign = async () => {
     const targetAudience = customers.map((customer) => customer._id);
+    console.log(filters,targetAudience);
     console.log(customers);
     try {
       const response = await axios.post(

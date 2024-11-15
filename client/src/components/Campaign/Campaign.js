@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import './Campaign.css';
+import { RxCross2 } from "react-icons/rx";
 
 const Campaign = ({ name, date, description, status, filters, audienceSize, msg }) => {
   const [openviewbox, setviewbox] = useState(false);
@@ -36,7 +37,7 @@ const Campaign = ({ name, date, description, status, filters, audienceSize, msg 
       return (
         <ul>
           {Object.keys(filterObj).map((key) => (
-            <li key={key}>
+            <li key={key} style={{ color: 'rgb(0, 52, 175)' }}>
               <strong>{key.replace(/([A-Z])/g, ' $1').toUpperCase()}:</strong> {filterObj[key]}
             </li>
           ))}
@@ -52,11 +53,11 @@ const Campaign = ({ name, date, description, status, filters, audienceSize, msg 
     <>
       {openviewbox && (
         <div className='view_box'>
-          <button className="close_button" onClick={handleClosePopup}>Close</button>
+          <button className="close_button" onClick={handleClosePopup}><RxCross2 /></button>
           <h2>Campaign Details</h2>
           <p><strong>Name:</strong> {name}</p>
           <p><strong>Date Created:</strong> {formattedDate}</p>
-          <p><strong>Filters Used:</strong> {renderFilters(filters)}</p>
+          <p><strong>Filters Used:</strong> <div className='filters-used-part'>{renderFilters(filters)}</div></p>
           <p><strong>Description:</strong> {description}</p>
           <p><strong>Audience Segment Size:</strong> {audienceSize} customers</p>
           <p><strong>Message Template:</strong> {msg}</p>

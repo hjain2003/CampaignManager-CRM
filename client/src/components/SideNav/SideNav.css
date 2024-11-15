@@ -62,7 +62,7 @@
 .nav_link {
   padding: 1rem;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 10px;
   transition: background-color 0.3s;
   display: flex;
   align-items: center;
@@ -70,16 +70,8 @@
   line-height: 1.5;
 }
 
-.nav_icon {
-  margin-right: 0.75rem;
-  font-size: 1.4rem;
-  display: inline-block;
-  margin-top: -2px;
-}
-
 .nav_link:hover {
   background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
 }
 
 .nav_link:active {
@@ -91,14 +83,27 @@
   font-weight: bold;
 }
 
+.nav_icon {
+  margin-right: 0.75rem;
+  font-size: 1.4rem;
+  display: inline-block;
+  margin-top: -2px;
+}
+
 #logout {
-  border-radius: 6px;
-  padding: 0.5rem;
+  border-radius: 10px;
+  padding: 0.75vw;
   color: white;
-  background-color: red;
+  background-color:rgb(31, 3, 73);
   cursor: pointer;
   border: none;
   font-size: 1rem;
   align-self: flex-start; /* Aligns within the flex container */
   margin-top: -20px;
+  width: 95%;
 }
+
+#logout:hover {
+  background-color:rgb(53, 30, 87);
+}
+

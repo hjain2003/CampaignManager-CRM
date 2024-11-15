@@ -15,7 +15,7 @@ export const createCampaign = async (req, res) => {
       name,
       description,
       msgTemplate,
-      targetAudience:customers,
+      targetAudience,
       createdBy: userId,
       filtersUsed
     });

@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Line, Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { MdAddCircleOutline } from 'react-icons/md';
+
 import SideNav from '../SideNav/SideNav';
 import Campaign from '../Campaign/Campaign';
 import './Dashboard.css';
@@ -103,8 +105,8 @@ const Dashboard = () => {
           label: selectedChart === 'customerCount' ? 'Customer Count by Month' : 'Revenue by Month',
           data: chartValues,
           fill: false,
-          backgroundColor: selectedChart === 'customerCount' ? 'rgba(75, 192, 192, 0.6)' : 'rgba(255, 99, 132, 0.6)',
-          borderColor: selectedChart === 'customerCount' ? 'rgb(75, 192, 192)' : 'rgb(255, 99, 132)',
+          backgroundColor: selectedChart === 'customerCount' ? 'rgb(117, 184, 243)' : 'rgb(117, 184, 243)',
+          borderColor: selectedChart === 'customerCount' ? 'rgb(75, 192, 192)' : 'rgb(78, 142, 240)',
           tension: 0.1
         }
       ]
@@ -116,7 +118,7 @@ const Dashboard = () => {
       <SideNav />
       <div className='dashboard_content'>
         <div>
-          <label>Select Chart: </label>
+          <label className='select-chart-label'>Select Chart: </label>
           <select value={selectedChart} onChange={(e) => setSelectedChart(e.target.value)}>
             <option value="customerCount">Customer Count by Month</option>
             <option value="revenue">Revenue by Month</option>
@@ -177,7 +179,10 @@ const Dashboard = () => {
           )
         )}
         <br/>
-        <h2>Recent Campaigns</h2>
+        <div className='recent-campaigns-header-section'>
+          <div className='recent-campaigns-heading'>Recent Campaigns</div>
+          <div className='create-campaign-shortcut'><MdAddCircleOutline className='create-camp-icon-short' /> Create New Campaign</div>
+        </div>
         <br/>
         <div className='recent_campaign_container'>
           {campaigns.map((campaign, index) => (

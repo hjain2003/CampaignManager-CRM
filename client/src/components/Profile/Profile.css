@@ -1,66 +1,139 @@
+.image-and-name{
+  top: 2px;
+}
+
 .profile_img_holder{
-    height: 150px;
-    width: 150px;
-    border-radius: 100%;
-    border: 2px solid black;
+    border-radius: 4vh;
+    border: 2px solid rgb(121, 121, 121);
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: auto;
-    margin-top: 50px;
 }
 
 .profile_img_holder img{
-    height: 150px;
-    width: 150px;
-    border-radius: 100%;
+    height: 250px;
+    width: 250px;
+    border-radius: 4vh;
 }
-#fontchanger{
-    font-size: 20px;
+
+.first-row{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+  width: 90%;
+  align-items: center;
+  justify-items: center;
+  margin-top: 2vh;
+ 
+  background-color: rgb(240, 244, 255);
+  padding: 3vh;
+  margin-right: 4vh;
+  border-radius: 2vh;
+  margin-left: 6vh;
+
 }
-.profile_row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr; /* Equal column distribution */
-    gap: 120px; /* Space between columns */
-    align-items: center; /* Vertically center content within columns */
-    /* border: 2px solid black; */
 
-  }
-  
-  .profile_info_wrapper{
-    background-color: lightblue;
-    padding: 20px;
-    border-radius: 10px;
-  }
+.empInfoCard{
+  background-color: rgba(35, 35, 35, 0.845);
+  color: white;
+  padding: 4vh;
+  margin: 2vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  border: solid;
+  border-radius: 3vh;
+}
 
-  .profile_col {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .profile_col label {
-    font-weight: bold;
-  }
-  
-  .profile_img_holder {
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
-    border: 2px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    margin-top: 50px;
-  }
-  
-  .profile_img_holder img {
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
-  }
-  
-  #fontchanger {
-    font-size: 20px;
-  }
-  
+.empInfoLabel{
+  font-size: 2.5vh;
+  padding: 1vh;
+}
+
+.empInfoNumber{
+  font-size: 4.5vh;
+}
+
+.name-and-info{
+  display: flex;
+  flex-direction: column;
+}
+
+.main-stats{
+  display: flex;
+}
+
+.user-name-info{
+  font-size: 6vh;
+  font-weight: 600;
+  margin-left: 2vh;
+}
+
+
+.second-row{
+  display: flex;
+  flex-direction: row;
+  margin-top: 2vh;
+  margin-left: 3vh;
+  width: 95%;
+}
+
+.social-media{
+  background-color: rgb(240, 244, 255);
+  width: 25%;
+  padding: 5vh;
+  margin-right: 4vh;
+  border-radius: 2vh;
+  margin-left: 3vh;
+}
+
+.personal-details{
+  background-color: rgb(240, 244, 255);
+  width: 65%;
+  padding: 5vh;
+  border-radius: 2vh;
+}
+
+.personal-info-heading-link{
+  font-size: 3vh;
+  padding-bottom: 2vh;
+  justify-self: center;
+  font-weight: 500;
+}
+
+.personal-info-heading-perso{
+  font-size: 4vh;
+  justify-self: center;
+  font-weight: 500;
+  padding-bottom: 2vh;
+}
+
+.imp-link-link{
+  display: flex;
+  flex-direction: row;
+  font-size: 2.5vh;
+  padding-top: 1.5vh;
+  padding-bottom: 1.5vh;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  font-style: normal;
+}
+
+
+.imp-link-link > a{
+  text-decoration: none;
+  color: black;
+}
+
+.logo-link{
+  padding-right: 2vh;
+  align-items: center;
+}
+
+.info-label{
+  font-size: 3vh;
+  font-weight: 500;
+  width: 30%;
+}
