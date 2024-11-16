@@ -23,15 +23,13 @@ const SideNav = () => {
 
   // Determine active link based on current path
   useEffect(() => {
-    if(userData && userData.profilePic){
-      const pathToLink = {
-        '/dashboard': 'Dashboard',
-        '/campaignHistory': 'Campaign History',
-        '/createCampaign': 'Create Campaign',
-        '/profile': 'Profile',
-      };
-      setActiveLink(pathToLink[location.pathname] || 'Dashboard');
-    }
+    const pathToLink = {
+      '/dashboard': 'Dashboard',
+      '/campaignHistory': 'Campaign History',
+      '/createCampaign': 'Create Campaign',
+      '/profile': 'Profile',
+    };
+    setActiveLink(pathToLink[location.pathname] || 'Dashboard');
   }, [location.pathname]);
 
   const handleNavClick = (link, path) => {

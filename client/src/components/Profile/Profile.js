@@ -110,7 +110,7 @@ const Profile = () => {
                     <LuGlobe /> 
                   </div>
                   <div className="link-label-link">
-                    Company Website
+                    <a href="https://www.getxeno.com/" target="new" >Company Website</a>
                   </div>
                 </div>
                 <hr/>
@@ -141,7 +141,7 @@ const Profile = () => {
                     <FaLinkedin />
                   </a>
                   </div>
-                  <a className="link-label-link" href="https://www.linkedin.com/in/harsh--jain">
+                  <a className="link-label-link" href="">
                     Your Linkedin
                   </a>
                 </div>
@@ -159,7 +159,7 @@ const Profile = () => {
                     Phone: 
                   </div>
                   <div className="link-label-link">
-                    +91 9958959486
+                    +91 99xxxxxxxx
                   </div>
                 </div>
                 <hr/>
@@ -188,7 +188,7 @@ const Profile = () => {
                   Manager:
                   </div>
                   <div className="link-label-link">
-                    Nilesh Kanthed
+                    ABCD
                   </div>
                 </div>
                 <hr/>

@@ -176,6 +176,7 @@ const Campaign = ({ name, date, description, status, filters, audienceSize, msg,
         </button>
 
         <h3>{name}</h3>
+        <hr/>
         <br />
         <p>
           <strong>Date:</strong> {formattedDate}
@@ -186,7 +187,7 @@ const Campaign = ({ name, date, description, status, filters, audienceSize, msg,
         </p>
         <br />
         {status === "Completed" && communicationLog && (
-          <p>
+          <p id="commlogspace">
             <strong>Mails Sent:</strong> {communicationLog.msgsSentCount} /{" "}
             {communicationLog.msgsSentCount + communicationLog.msgsFailedCount}{" "}
             <b>

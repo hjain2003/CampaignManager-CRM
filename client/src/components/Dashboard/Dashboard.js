@@ -139,8 +139,8 @@ const Dashboard = () => {
         <div>
           <label className="select-chart-label">Select Chart: </label>
           <select value={selectedChart} onChange={(e) => setSelectedChart(e.target.value)}>
-            <option value="customerCount">Customer Count by Month</option>
-            <option value="revenue">Revenue by Month</option>
+            <option value="customerCount">Customer Visits by Month</option>
+            <option value="revenue">Customer Spend by Month</option>
           </select>
         </div>
 
@@ -206,24 +206,29 @@ const Dashboard = () => {
         </div>
         <br />
         <div className="recent_campaign_container">
-          {campaigns.map((campaign, index) => (
-            <Campaign
-              key={index}
-              campaignId={campaign._id}
-              name={campaign.name}
-              date={campaign.createdDate}
-              description={campaign.description}
-              status={campaign.status}
-              msg={campaign.msgTemplate}
-              filters={campaign.filters}
-              audienceSize={campaign.targetAudience.length}
-            />
-          ))}
-          <span className="arrow-button" onClick={() => navigate("/campaignHistory")}>
-          <MdKeyboardArrowRight className="arrow-icon" />
-        </span>
+          {campaigns.length > 0 ? (
+            campaigns.map((campaign, index) => (
+              <Campaign
+                key={index}
+                campaignId={campaign._id}
+                name={campaign.name}
+                date={campaign.createdDate}
+                description={campaign.description}
+                status={campaign.status}
+                msg={campaign.msgTemplate}
+                filters={campaign.filters}
+                audienceSize={campaign.targetAudience.length}
+              />
+            ))
+          ) : (
+            <p className="no-campaign-message">No campaigns created yet</p>
+          )}
+          {campaigns.length > 0 && (
+            <span className="arrow-button" onClick={() => navigate("/campaignHistory")}>
+              <MdKeyboardArrowRight className="arrow-icon" />
+            </span>
+          )}
         </div>
-       
       </div>
     </div>
   );

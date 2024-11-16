@@ -1,7 +1,7 @@
 .campaign_card {
   position: relative;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  height: 240px;
+  height: 260px;
   width: 100%; 
   max-width: 300px; 
   display: flex;
@@ -12,8 +12,11 @@
   margin-right: 20px;
   box-sizing: border-box; 
   border-radius: 10px;
+  
 }
-
+.campaign_card hr{
+  margin-top: 5px;
+}
 .campaign_card h3 {
   color: #333;
 }
@@ -37,7 +40,9 @@
   color: #666;
   padding: 1.5vh;
 }
-
+#commlogspace{
+  margin-top: -5px;
+}
 .popup_icon_button:hover {
   background-color: rgb(218, 218, 218);
 }
