@@ -12,7 +12,7 @@ export const authenticate = async (req, res, next) => {
 
   try {
     const response = await axios.post(`https://oauth2.googleapis.com/tokeninfo?id_token=${token}`);
-    req.user = response.data; // Attach decoded user info to the request object
+    req.user = response.data;
     const googleId = response.data.sub;
 
     // Find the user by Google ID

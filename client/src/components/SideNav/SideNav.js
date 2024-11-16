@@ -18,17 +18,20 @@ const SideNav = () => {
     if (storedUserData) {
       setUserData(JSON.parse(storedUserData));
     }
+    // console.log(userData.profilePic);
   }, []);
 
   // Determine active link based on current path
   useEffect(() => {
-    const pathToLink = {
-      '/dashboard': 'Dashboard',
-      '/campaignHistory': 'Campaign History',
-      '/createCampaign': 'Create Campaign',
-      '/profile': 'Profile',
-    };
-    setActiveLink(pathToLink[location.pathname] || 'Dashboard');
+    if(userData && userData.profilePic){
+      const pathToLink = {
+        '/dashboard': 'Dashboard',
+        '/campaignHistory': 'Campaign History',
+        '/createCampaign': 'Create Campaign',
+        '/profile': 'Profile',
+      };
+      setActiveLink(pathToLink[location.pathname] || 'Dashboard');
+    }
   }, [location.pathname]);
 
   const handleNavClick = (link, path) => {
@@ -80,7 +83,7 @@ const SideNav = () => {
       {/* User Profile Section */}
       {userData && (
         <div className="user_info">
-          <img src={userData.profilePic || 'default-profile.png'} alt="Profile" className="profile_pic" />
+          <img src={userData.profilePic} alt="Profile" className="profile_pic" />
           <div className="user_details">
             <p className="user_name">{userData.username}</p>
             <p className="user_email">{userData.email}</p>

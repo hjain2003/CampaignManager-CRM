@@ -41,7 +41,7 @@ const Dashboard = () => {
   }, [navigate]);
 
   useEffect(() => {
-    if (userData && userData.googleIdToken) {
+    if (userData && userData.googleIdToken && userData.profilePic) {
       fetchCustomerData();
       fetchCampaignHistory();
     }

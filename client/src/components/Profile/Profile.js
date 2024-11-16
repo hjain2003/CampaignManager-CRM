@@ -19,19 +19,22 @@ const Profile = () => {
     const storedUserData = localStorage.getItem("userData");
     if (storedUserData) {
       const parsedData = JSON.parse(storedUserData);
-      setUserData(parsedData);
+      setUserData(parsedData); 
+      //  console.log("Profile Picture URL:", userData.profilePic);
+
     } else {
       navigate("/");
     }
   }, [navigate]);
 
   useEffect(() => {
-    if (userData && userData.googleIdToken) {
+    if (userData && userData.googleIdToken && userData.profilePic) {
       fetchCampaignHistory();
     }
   }, [userData]);
 
   const fetchCampaignHistory = async () => {
+    console.log(userData.profilePic)
     try {
       const response = await axios.get("http://localhost:5000/campaign/history", {
         headers: {
@@ -60,7 +63,7 @@ const Profile = () => {
       <div className="first-row">
         <div className="image-and-name">
           <div className="profile_img_holder">
-              {imageLoaded ? (
+              {userData ? (
                 <img
                   src={userData.profilePic}
                   alt="Profile"
