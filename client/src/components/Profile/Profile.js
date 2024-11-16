@@ -36,7 +36,7 @@ const Profile = () => {
   const fetchCampaignHistory = async () => {
     console.log(userData.profilePic)
     try {
-      const response = await axios.get("http://localhost:5000/campaign/history", {
+      const response = await axios.get("https://campaign-backend-beta.vercel.app/campaign/history", {
         headers: {
           Authorization: `Bearer ${userData.googleIdToken}`,
         },

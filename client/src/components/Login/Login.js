@@ -19,7 +19,7 @@ const Login = () => {
     try {
       // Send token to backend
       const res = await axios.post(
-        "http://localhost:5000/user/login",
+        "https://campaign-backend-beta.vercel.app/user/login",
         { token: credential },
         {
           withCredentials: true,

@@ -64,7 +64,7 @@ const CreateCampaign = () => {
     const params = new URLSearchParams(filters).toString();
     try {
       const response = await axios.get(
-        `http://localhost:5000/customer/filter?${params}`,
+        `https://campaign-backend-beta.vercel.app/customer/filter?${params}`,
         {
           headers: {
             Authorization: `Bearer ${userData.googleIdToken}`
@@ -97,7 +97,7 @@ const CreateCampaign = () => {
     // console.log(customers);
     try {
       const response = await axios.post(
-        "http://localhost:5000/campaign/create",
+        "https://campaign-backend-beta.vercel.app/campaign/create",
         {
           name,
           description,

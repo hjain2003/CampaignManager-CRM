@@ -50,7 +50,7 @@ const Dashboard = () => {
   const fetchCustomerData = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:5000/customer/all", {
+      const response = await axios.get("https://campaign-backend-beta.vercel.app/customer/all", {
         headers: {
           Authorization: `Bearer ${userData.googleIdToken}`,
         },
@@ -68,7 +68,7 @@ const Dashboard = () => {
   const fetchCampaignHistory = async () => {
     try {
       if (!userData || !userData.googleIdToken) return;
-      const response = await axios.get("http://localhost:5000/campaign/history", {
+      const response = await axios.get("https://campaign-backend-beta.vercel.app/campaign/history", {
         headers: {
           Authorization: `Bearer ${userData.googleIdToken}`,
         },

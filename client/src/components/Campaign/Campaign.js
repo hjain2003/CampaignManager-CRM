@@ -74,7 +74,7 @@ const Campaign = ({ name, date, description, status, filters, audienceSize, msg,
     const fetchCommunicationLog = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/commLogs/${campaignId}/viewLog`,
+          `https://campaign-backend-beta.vercel.app/commLogs/${campaignId}/viewLog`,
           {
             headers: {
               Authorization: `Bearer ${userData.googleIdToken}`,
@@ -109,7 +109,7 @@ const Campaign = ({ name, date, description, status, filters, audienceSize, msg,
       // setError(null); // Reset error state
 
       const response = await axios.post(
-        `http://localhost:5000/campaign/${campaignId}/send-emails`,
+        `https://campaign-backend-beta.vercel.app/campaign/${campaignId}/send-emails`,
         {},
         {
           headers: {

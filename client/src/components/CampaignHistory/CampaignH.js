@@ -20,7 +20,7 @@ const CampaignH = () => {
       const token = parsedData?.googleIdToken;
 
       if (token) {
-        const response = await axios.get('http://localhost:5000/campaign/history', {
+        const response = await axios.get('https://campaign-backend-beta.vercel.app/campaign/history', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
