@@ -1,8 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
-import { connectDB } from './dbconn/conn.js';
 import cors from 'cors';
+import { connectDB } from './dbconn/conn.js';
 import userRouter from './routes/userRoutes.js';
 import customerRouter from './routes/customerRoutes.js';
 import campaignRouter from './routes/campaignRoutes.js';
@@ -14,13 +14,14 @@ dotenv.config({ path: './config.env' });
 connectDB();
 
 //middlewares
-app.use(cookieParser());
 app.use(cors({
     origin: 'https://campaign-manager-crm-frontend.vercel.app',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+app.options('*', cors());
+app.use(cookieParser());
 app.use(express.json());
 app.use('/user',userRouter);
 app.use('/customer',customerRouter);
